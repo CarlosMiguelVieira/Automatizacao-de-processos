@@ -17,7 +17,7 @@ for clube in dflista:
     df = pd.read_excel(rf'Q:\pasta\{clube}.xlsx', index_col = False )
     # df = df[['Unnamed: 1','Unnamed: 31']].dropna()
 
-    # df = pd.read_excel(r'C:\Users\cpinto\Desktop\Teste\Carteira_106824_11-8-2022.xlsx', index_col = False )
+    # df = pd.read_excel(r'C:Teste\Carteira_106824_11-8-2022.xlsx', index_col = False )
     # # df = df2[['Unnamed: 1','Unnamed: 37']].dropna()
 
     # df2 = pd.read_excel(r'Qs\Carteira_419572.xlsx', index_col = False )
