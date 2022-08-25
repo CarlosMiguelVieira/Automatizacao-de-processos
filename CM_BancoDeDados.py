@@ -9,7 +9,7 @@ import win32com.client
 import datetime
 data = date.today()
 
-conn = cx_Oracle.connect(user="risco", password="Risko2012",dsn="srvoraclesp-scan.ativa.local:1521/ATIVA")
+conn = cx_Oracle.connect(user="usuario", password="senha",dsn="local:1521/dnsqualquer")
 cur = conn.cursor()
 
 ### SFP
