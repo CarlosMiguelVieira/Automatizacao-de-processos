@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 # %%
-dflista = pd.read_csv(r'Q:\Risco x Backoffice\Clubes\Bases\lista.csv',index_col = False,sep=';')
+dflista = pd.read_csv(r'Q:\lista.csv',index_col = False,sep=';')
 dflista = dflista['clube'].tolist()
 
 list_ok=[]
@@ -14,13 +14,13 @@ for clube in dflista:
     clube = str(clube)
     # clube = '106824'
     # clube = '96144'
-    df = pd.read_excel(rf'Q:\Risco x Backoffice\Clubes\Arquivos Clubes\{clube}.xlsx', index_col = False )
+    df = pd.read_excel(rf'Q:\pasta\{clube}.xlsx', index_col = False )
     # df = df[['Unnamed: 1','Unnamed: 31']].dropna()
 
     # df = pd.read_excel(r'C:\Users\cpinto\Desktop\Teste\Carteira_106824_11-8-2022.xlsx', index_col = False )
     # # df = df2[['Unnamed: 1','Unnamed: 37']].dropna()
 
-    # df2 = pd.read_excel(r'Q:\Risco\Novo Risco\1 - Rotinas\Clubes\Carteira_419572.xlsx', index_col = False )
+    # df2 = pd.read_excel(r'Qs\Carteira_419572.xlsx', index_col = False )
     # # df = df[['Unnamed: 1','Unnamed: 22']].dropna()
 
     df.drop(df.index[0:11], inplace = True)  
@@ -33,7 +33,7 @@ for clube in dflista:
     df['Quantidade'] = df['Quantidade'].astype(int)
 
 
-    dfBase = pd.read_csv(r'Q:\Risco x Backoffice\Clubes\Bases\Base_SQL.csv',sep=';')
+    dfBase = pd.read_csv(r'Q:\Base_SQL.csv',sep=';')
     dfBase=dfBase.groupby(['COD_CLI','COD_NEG']).agg({'QTDE_TOT':'sum'}).reset_index()
 
     dfBase['COD_CLI']=dfBase['COD_CLI'].astype(str)
@@ -117,11 +117,11 @@ print(list_clube,list_ok)
 
 
 dfRelatorio = carteira[['Clube','Código','QTDE_CLUBE','QTDE_PORTAL','Diferenca']].reset_index(drop=True)
-dfRelatorio.to_excel(r'Q:\Risco x Backoffice\Clubes\Relatorio Descritivo.xlsx', index=False)
+dfRelatorio.to_excel(r'Q:\Relatorio Descritivo.xlsx', index=False)
 
 
 
 dfl = pd.DataFrame((zip(list_clube,list_ok)), columns = ['Clube','Situação'])
 
-dfl.to_excel(r'Q:\Risco x Backoffice\Clubes\Relatorio Simplificado.xlsx', index=False)
+dfl.to_excel(r'Q:\Relatorio Simplificado.xlsx', index=False)
 # %%
