@@ -7,7 +7,7 @@ from datetime import date
 from src.ferramentas import mandar_email
 
 # %%
-dfFIMRTC = pd.read_excel(r'Q:\Risco\Novo Risco\pythonrisco\Codigos\data\CM_teste\FIM.xls', index_col = False, sheet_name="Margem" )
+dfFIMRTC = pd.read_excel(r'Q:\CM_teste\FIM.xls', index_col = False, sheet_name="Margem" )
 print(dfFIMRTC)
 
 
@@ -29,12 +29,12 @@ CollatFIM = dfCollatFIM['Total'].sum()
 
 
 
-# os.chdir(r'Q:\Risco\Novo Risco\Ativa Asset\Total Return Fim')
+# os.chdir(r'Q:\Total Return Fim')
 # list_dir = os.listdir()
 # fname = list_dir[-1]
 # dfFIMPatrimonio = pd.read_excel(fname, index_col = False )
-path = r'Q:\Risco\Novo Risco\Ativa Asset\Total Return Fim'
-# path = r'Q:\Risco\Novo Risco\Ativa Asset\FIA\Carteira Diaria - 2022-06'
+path = r'Q:\Total Return Fim'
+# path = r'Q:\Carteira Diaria - 2022-06'
 
 os.chdir(path)
 cwd_str = os.getcwd()
@@ -68,7 +68,7 @@ perPLFIM = riscoTotalFim/float(patrimonioFIM[0])
 
 
 
-dfFIM = pd.read_excel(r'Q:\Risco\Novo Risco\Ativa Asset\Controle Risco FIM Total Return.xlsx', index_col = False )
+dfFIM = pd.read_excel(r'Q:\Controle Risco FIM Total Return.xlsx', index_col = False )
 # dfFIM.drop(columns=['Coluna1'], inplace=True)
 dfFIM['Data'] = dfFIM['Data'].astype('str')
 dfFIM.info()
@@ -81,7 +81,7 @@ dfFIM['Data'] = pd.to_datetime(dfFIM['Data'], errors='coerce')
 dfFIM['Data'] = dfFIM['Data'].dt.strftime('%d/%m/%Y')
 
 
-dfFIM.to_excel(r'Q:\Risco\Novo Risco\Ativa Asset\Controle Risco FIM Total Return.xlsx', index=False)
+dfFIM.to_excel(r'Q:\Controle Risco FIM Total Return.xlsx', index=False)
 
 
 print(dfFIMPatrimonio)
@@ -98,7 +98,7 @@ dfFIM=dfFIM.round(2)
 ##################################################
 
 
-dfHEDGERTC = pd.read_excel(r'Q:\Risco\Novo Risco\pythonrisco\Codigos\data\CM_teste\HEADGE.xls', index_col = False, sheet_name="Margem" )
+dfHEDGERTC = pd.read_excel(r'Q:\CM_teste\HEADGE.xls', index_col = False, sheet_name="Margem" )
 print(dfHEDGERTC)
 
 
@@ -119,12 +119,12 @@ CollateHEADGE = dfCollatHEADGE['Total'].sum()
 
 
 ##################################################
-# os.chdir(r'Q:\Risco\Novo Risco\pythonrisco\Codigos\data\CM_teste\HEADGE')
+# os.chdir(r'Q:\CM_teste\HEADGE')
 # list_dir = os.listdir()
 # fname = list_dir[-1]
 # dfHEADGEPatrimonio = pd.read_excel(fname, index_col = False )
-path = r'Q:\Risco\Novo Risco\Ativa Asset\HEDGE FIM'
-# path = r'Q:\Risco\Novo Risco\Ativa Asset\FIA\Carteira Diaria - 2022-06'
+path = r'Q:\HEDGE FIM'
+# path = r'Q:\Carteira Diaria - 2022-06'
 
 os.chdir(path)
 cwd_str = os.getcwd()
@@ -159,7 +159,7 @@ perPLHEADGE = riscoTotalHEADGE/float(patrimonioHEADGE[0])
 
 
 
-dfHEDGE = pd.read_excel(r'Q:\Risco\Novo Risco\Ativa Asset\Controle Risco HEDGE FIM.xlsx', index_col = False )
+dfHEDGE = pd.read_excel(r'Q:\Controle Risco HEDGE FIM.xlsx', index_col = False )
 # dfHEDGE.drop(columns=['Coluna1'], inplace=True)
 dfHEDGE['Data'] = dfHEDGE['Data'].astype('str')
 dfHEDGE.loc[dfHEDGE.shape[0]]=[ data_atual,EliHEADGE,IneHEADGE,riscoTotalHEADGE,CollateHEADGE,defSupHEADGE,float(patrimonioHEADGE[0]),perPLHEADGE ]
@@ -174,7 +174,7 @@ dfHEDGE['Data'] = dfHEDGE['Data'].dt.strftime('%d/%m/%Y')
 
 
 dfHEDGE.info()
-dfHEDGE.to_excel(r'Q:\Risco\Novo Risco\Ativa Asset\Controle Risco HEDGE FIM.xlsx', index=False)
+dfHEDGE.to_excel(r'Q:\Controle Risco HEDGE FIM.xlsx', index=False)
 print(dfHEADGEPatrimonio)
 dfHEDGE['%PL'] = abs(dfHEDGE['%PL'])
 dfHEDGE['%PL'] = pd.Series(["{0:.2f}%".format(val * 100) for val in dfHEDGE['%PL']], index = dfHEDGE.index)
@@ -191,24 +191,14 @@ dfHEDGE=dfHEDGE.round(2)
 # %%
 data_email=date.today()
 data_email = data_email.strftime('%d/%m/%Y')
-endereco = "mateus.silva@ativainvestimentos.com.br;carlos.mello@ativaasset.com.br;guilherme.schiller@ativaasset.com.br;caio.lobo@ativainvestimentos.com.br"
-endereco_cc = "risco@ativainvestimentos.com.br;juliana.figueiredo@ativainvestimentos.com.br"
-titulo = "Controle Histórico de Risco Ativa Asset HEDGE FIM - " + data_email
+endereco = ""
+endereco_cc = "cm_vp@hotmail.com"
+titulo = "Controle Histórico - " + data_email
 mensagem = ("<p>Prezados,</p>"
        "<p></p>"
-       "<p>Segue abaixo a tabela do controle histórico de risco da Ativa Asset HEDGE FIM.</p>"
-       "<p></p>"
-       "<p>Nela foram usadas as parametrizações de risco CORE da B3, sendo os mesmos que compõe a colaterização de carteira para chamada de margem.</p>"
-       "<p></p>"
-       "<p>Dentre as principais características do CORE, podem ser destacados:</p>"
-       "<p>&emsp;&emsp;&emsp;•	Perda severa (teste de estresse): nível de confiança de 99,96% (1 crise a cada 10 anos)</p>"
-       "<p>&emsp;&emsp;&emsp;•	Possui múltiplos horizontes de risco: operações de encerramento são diárias, podendo ocorrer no período de 1 a 10 dias</p>"
-       "<p></p>"
-       "<p>Dessa forma, foram separadas as posições que consomem risco em Opções e Futuros. Assim, de forma segregada podemos verificar que estes valores de risco são perdas máximas (VaR) de 10 dias de encerramento, sendo necessária multiplicar pelo fator de1/√10 para termos o valor VaR de 1D.</p>"
-       "<p></p>"
+       "<p>Segue abaixo a tabela do controle histórico de risco.</p>"
        "<p></p>"
        "<p>"+dfHEDGE.tail(5).to_html(index=False).replace('<td>', '<td align="center">')+"</p>")
-# anexo = r'Q:\Risco\Novo Risco\pythonrisco\Codigos\imagens\VaR_FIA.png'
 mandar_email(endereco,endereco_cc,titulo,mensagem)
 
 
@@ -216,23 +206,13 @@ mandar_email(endereco,endereco_cc,titulo,mensagem)
 
 
 
-endereco = "mateus.silva@ativainvestimentos.com.br;carlos.mello@ativaasset.com.br;guilherme.schiller@ativaasset.com.br;caio.lobo@ativainvestimentos.com.br"
-endereco_cc = "risco@ativainvestimentos.com.br;juliana.figueiredo@ativainvestimentos.com.br"
-titulo = "Controle Histórico de Risco Ativa Total Return Fim - " + data_email
+endereco = ""
+endereco_cc = "cm_vp@hotmail.com"
+titulo = "Controle Histórico de Risco - " + data_email
 mensagem = ("<p>Prezados,</p>"
        "<p></p>"
-       "<p>Segue abaixo a tabela do controle histórico de risco da Ativa Total Return Fim.</p>"
-       "<p></p>"
-       "<p>Nele foram usadas as parametrizações de risco CORE da B3, sendo os mesmos que compõe a colaterização de carteira para chamada de margem.</p>"
-       "<p></p>"
-       "<p>Dentre as principais características do CORE, podem ser destacados:</p>"
-       "<p>&emsp;&emsp;&emsp;•	Perda severa (teste de estresse): nível de confiança de 99,96% (1 crise a cada 10 anos)</p>"
-       "<p>&emsp;&emsp;&emsp;•	Possui múltiplos horizontes de risco: operações de encerramento são diárias, podendo ocorrer no período de 1 a 10 dias</p>"
-       "<p></p>"
-       "<p>Dessa forma, foram separadas as posições que consomem risco em Opções e Futuros. Assim, de forma segregada podemos verificar que estes valores de risco são perdas máximas (VaR) de 10 dias de encerramento, sendo necessária multiplicar pelo fator de1/√10 para termos o valor VaR de 1D.</p>"
-       "<p></p>"
-       "<p></p>"
+       "<p>Segue abaixo a tabela do controle histórico de risco</p>"
        "<p>"+dfFIM.tail(5).to_html(index=False).replace('<td>', '<td align="center">')+"</p>")
-# anexo = r'Q:\Risco\Novo Risco\pythonrisco\Codigos\imagens\VaR_FIA.png'
+# anexo = r'Q:\VaR_FIA.png'
 mandar_email(endereco,endereco_cc,titulo,mensagem)
 # %%
