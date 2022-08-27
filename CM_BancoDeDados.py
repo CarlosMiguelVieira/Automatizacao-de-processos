@@ -33,9 +33,9 @@ dfSaldo = pd.DataFrame(result,columns=['pat.DT_REFERENCIA','SUM(SALDODISPONIVEL)
 dataSaldo = data.strftime('%d-%m-%Y')
 
 
-dfSaldo.to_excel(fr'Q:\Risco\Novo Risco\3 - Banco Central\Saldo de terceiros\Saldo_terceiros {dataSaldo}.xlsx', index=False)
-dfFlex.to_excel(fr'Q:\Risco\Novo Risco\21 - ExecOPC\Flex\Flex - {data}.xls', index=False)
-dfSFP.to_csv(fr'Q:\Risco\Novo Risco\26 - PLDFT\SFP\SFP - {data}.csv', index=False)
+dfSaldo.to_excel(fr'Q:\Saldo de terceiros\Saldo_terceiros {dataSaldo}.xlsx', index=False)
+dfFlex.to_excel(fr'Q:\Flex\Flex - {data}.xls', index=False)
+dfSFP.to_csv(fr'Q:\PLDFT\SFP\SFP - {data}.csv', index=False)
 
 
 
@@ -44,7 +44,7 @@ dfSFP.to_csv(fr'Q:\Risco\Novo Risco\26 - PLDFT\SFP\SFP - {data}.csv', index=Fals
 
 data = data.strftime('%d/%m/%Y')
 endereco = ""
-endereco_cc = "risco@ativainvestimentos.com.br"
+endereco_cc = "cm_vp@hotmail.com"
 titulo = "Cotrole rotina da manhã - " + str(data)
 mensagem = ("<p>Prezados,</p>"
        "<p></p>"
@@ -60,18 +60,18 @@ newMail.To = endereco_cc
 # newMail.display()
 newMail.Send()
 
-# anexo = r'Q:\Risco\Novo Risco\pythonrisco\Codigos\imagens\VaR_FIA.png'
+# anexo = r'Q:\VaR_FIA.png'
 # mandar_email(endereco,endereco_cc,titulo,mensagem)
 
 
 # data_email = data_email.strftime('%d/%m/%Y')
 # endereco = ""
-# endereco_cc = "carlos.pinto@ativainvestimentos.com.br"
+# endereco_cc = ""
 # titulo = "Controle Histórico de Risco Ativa Asset HEDGE FIM - " + data_email
 # mensagem = ("<p>Prezados,</p>"
 #        "<p></p>"
 
-# # anexo = r'Q:\Risco\Novo Risco\pythonrisco\Codigos\imagens\VaR_FIA.png'
+# # anexo = r'Q:\VaR_FIA.png'
 # mandar_email(endereco,endereco_cc,titulo,mensagem)
 
 
